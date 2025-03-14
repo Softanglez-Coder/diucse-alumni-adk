@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/Softanglez-Coder/diucse-alumni-adk/compare/v1.0.0...v1.0.1) (2025-03-14)
+
+
+### Bug Fixes
+
+* set packages as non-private and update release assets in configuration ([1a29ef9](https://github.com/Softanglez-Coder/diucse-alumni-adk/commit/1a29ef93f83cda4a405d96347de48ab175a8ff4b))
+
 # 1.0.0 (2025-03-14)
 
 
