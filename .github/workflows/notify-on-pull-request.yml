@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - main
-    types: [opened, ready_for_review, closed]
+    types: [opened, ready_for_review, closed, merged, draft]
 
 jobs:
   notify:
@@ -25,7 +25,9 @@ jobs:
         run: |
           if [ "${{ github.event.action }}" == "opened" ]; then
             MESSAGE="A new pull request has been created: ${{ github.event.pull_request.html_url }}"
-          elif [ "${{ github.event.action }}" == "review_requested" ]; then
+          elif [ "${{ github.event.action }}" == "draft" ]; then
+            MESSAGE="A pull request has been marked as draft: ${{ github.event.pull_request.html_url }}"
+          elif [ "${{ github.event.action }}" == "ready_for_review" ]; then
             MESSAGE="A pull request has been marked for review: ${{ github.event.pull_request.html_url }}"
           elif [ "${{ github.event.action }}" == "closed" ] && [ "${{ github.event.pull_request.merged }}" == "true" ]; then
             MESSAGE="A pull request has been merged: ${{ github.event.pull_request.html_url }}"
