@@ -9,7 +9,7 @@
   "description": "",
   "scripts": {
     "build:core": "npm run build --workspace=@diucsealumni/core",
-    "build:utils": "npm run build --workspace=@diucsealumni/tils",
+    "build:utils": "npm run build --workspace=@diucsealumni/utils",
     "build:packages": "npm run build:core && npm run build:utils",
     "build:app": "npm run build --workspace=example-app",
     "build:all": "npm run build:packages && npm run build:app"
