@@ -7,10 +7,7 @@
   "scripts": {
     "build": "vite build"
   },
-  "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
+  "peerDependencies": {},
   "devDependencies": {
     "vite": "^5.0.0",
     "typescript": "^5.2.0"
