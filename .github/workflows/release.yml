@@ -31,6 +31,7 @@ jobs:
           TAG_NAME=$(date +'%Y.%m.%d.%3N')
           echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
           git tag $TAG_NAME
+          git remote set-url origin https://x-access-token:${{ secrets.PAT }}@github.com/Softanglez-Coder/diucse-alumni-adk.git
           git push origin $TAG_NAME
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
