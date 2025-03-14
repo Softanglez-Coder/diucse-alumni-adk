@@ -17,7 +17,7 @@ jobs:
       - name: Add reviewers
         run: gh pr edit --add-reviewer Softanglez-Coder/diucse-alumni-developers ${{ github.event.number }}
         env:
-          GIT_TOKEN: ${{ secrets.PAT }}
+          GH_TOKEN: ${{ secrets.PAT }}
 
       - name: Send notification to Discord
         env:
