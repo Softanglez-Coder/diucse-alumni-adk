@@ -5,7 +5,7 @@
     "packages/*",
     "example-app"
   ],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "scripts": {
     "build:core": "npm run build --workspace=@diucsealumni/core",

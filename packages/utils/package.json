@@ -1,7 +1,7 @@
 {
   "name": "@diucsealumni/utils",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "module": "index.es.js",
   "types": "index.d.ts",
