@@ -14,11 +14,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Assign team to review pull request
-        run: gh pr review --add-team Softanglez-Coder/diucse-alumni-developers --repo ${{ github.repository }} ${{ github.event.pull_request.number }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
-
       - name: Send notification to Discord
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL_CODE_REVIEW }}
