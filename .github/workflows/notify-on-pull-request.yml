@@ -11,6 +11,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Assign team to review pull request
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.PAT }}
+          script: |
+            const team = 'diucse-alumni-developers';
+            const teamMembers = await github.teams.listMembersInOrg({ org: 'Softanglez-Coder', team_slug: team });
+            const teamMemberUsernames = teamMembers.data.map(member => member.login);
+            const teamMemberUsernamesString = teamMemberUsernames.join(' ');
+            github.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              reviewers: teamMemberUsernamesString.split(' ')
+            });
+
       - name: Send notification to Discord
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL_CODE_REVIEW }}
