@@ -2,6 +2,8 @@ name: Notify Discord on Pull Request Events
 
 on:
   pull_request:
+    branches:
+      - main
     types: [opened, review_requested, closed]
 
 jobs:
