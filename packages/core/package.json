@@ -1,7 +1,7 @@
 {
   "name": "@diucsealumni/core",
   "private": false,
-  "version": "1.0.3",
+  "version": "1.0.4-DEV.1",
   "main": "index.js",
   "module": "index.es.js",
   "types": "index.d.ts",
