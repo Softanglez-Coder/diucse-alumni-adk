@@ -6,6 +6,7 @@ export default defineConfig({
     plugins: [react(), dts()],
     build: {
         outDir: "./../../dist/core",
+        emptyOutDir: true,
         lib: {
             entry: "src/index.ts",
             name: "core",
