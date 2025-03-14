@@ -1,0 +1,46 @@
+name: Release Alpha Version of Packages
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: rm -rf node_modules package-lock.json && npm install
+
+      - name: Build packages
+        run: npm run build:packages
+
+      - name: Create Tag
+        id: create_tag
+        run: |
+          TAG_NAME=$(date +'%Y.%m.%d.%3N-alpha')
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git tag $TAG_NAME
+          git push origin $TAG_NAME
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          release_name: ${{ env.TAG_NAME }}
+          draft: false
+          prerelease: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

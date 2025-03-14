@@ -1,0 +1,62 @@
+name: Release New Version of Packages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: rm -rf node_modules package-lock.json && npm install
+
+      - name: Build packages
+        run: npm run build:packages
+
+      - name: Create Tag
+        id: create_tag
+        run: |
+          TAG_NAME=$(date +'%Y.%m.%d.%3N')
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git tag $TAG_NAME
+          git push origin $TAG_NAME
+
+      - name: Get Previous Tag
+        id: prev_tag
+        run: echo "PREV_TAG=$(git describe --tags --abbrev=0 HEAD^)" >> $GITHUB_ENV
+
+      - name: Generate Release Notes
+        id: release_notes
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { execSync } = require('child_process');
+            const prevTag = process.env.PREV_TAG;
+            const currentTag = process.env.TAG_NAME;
+            const commitMessages = execSync(`git log ${prevTag}..${currentTag} --pretty=format:'%s'`).toString();
+            return commitMessages;
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          release_name: ${{ env.TAG_NAME }}
+          draft: false
+          prerelease: false
+          body: ${{ steps.release_notes.outputs.result }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
