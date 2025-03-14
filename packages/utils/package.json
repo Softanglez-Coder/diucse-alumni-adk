@@ -2,9 +2,9 @@
   "name": "@diucsealumni/utils",
   "private": false,
   "version": "0.0.0",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
+  "main": "index.js",
+  "module": "index.es.js",
+  "types": "index.d.ts",
   "scripts": {
     "build": "vite build"
   },
@@ -12,5 +12,8 @@
   "devDependencies": {
     "vite": "^5.0.0",
     "typescript": "^5.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
