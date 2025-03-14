@@ -39,5 +39,5 @@ jobs:
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL_GENERAL }}
         run: |
-          MESSAGE="A new release (version ${{ steps.semantic_release.outputs.nextRelease.version }}) has been published: ${{ github.event.repository.html_url }}/releases/tag/${{ steps.semantic_release.outputs.nextRelease.version }}"
+          MESSAGE="A new release has been published: ${{ github.event.repository.html_url }}/releases/latest"
           curl -H "Content-Type: application/json" -d "{\"content\": \"$MESSAGE\"}" $DISCORD_WEBHOOK_URL
