@@ -1,8 +1,8 @@
 {
+  "extends": [
+    "../../tsconfig.json"
+  ],
   "compilerOptions": {
-    "moduleResolution": "bundler",
-    "paths": {
-      "@diucsealumni/utils/*": ["./src/*"]
-    }
+    "moduleResolution": "bundler"
   }
 }

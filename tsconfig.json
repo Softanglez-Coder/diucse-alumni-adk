@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@diucsealumni/core": ["dist/core/index"],
+      "@diucsealumni/services": ["dist/services/index"],
+      "@diucsealumni/utils": ["dist/utils/index"]
+    }
+  }
+}

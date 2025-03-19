@@ -10,7 +10,8 @@
   "scripts": {
     "build:core": "npm run build --workspace=@diucsealumni/core",
     "build:utils": "npm run build --workspace=@diucsealumni/utils",
-    "build:packages": "npm run build:core && npm run build:utils",
+    "build:services": "npm run build --workspace=@diucsealumni/services",
+    "build:packages": "npm run build:core && npm run build:utils && npm run build:services",
     "build:app": "npm run build --workspace=example-app",
     "build:all": "npm run build:packages && npm run build:app"
   },
@@ -109,6 +110,20 @@
         "@semantic-release/npm",
         {
           "pkgRoot": "dist/utils",
+          "npmPublish": true
+        }
+      ],
+      [
+        "@semantic-release/npm",
+        {
+          "pkgRoot": "packages/services",
+          "npmPublish": false
+        }
+      ],
+      [
+        "@semantic-release/npm",
+        {
+          "pkgRoot": "dist/services",
           "npmPublish": true
         }
       ],
