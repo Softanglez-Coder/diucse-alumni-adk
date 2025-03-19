@@ -8,6 +8,12 @@
   "scripts": {
     "build": "vite build"
   },
+  "exports": {
+    ".": {
+      "import": "index.es.js",
+      "require": "index.js"
+    }
+  },
   "peerDependencies": {},
   "devDependencies": {
     "vite": "^5.0.0",
