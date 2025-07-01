@@ -1,0 +1,33 @@
+{
+  "name": "@diucsealumni/services",
+  "version": "0.0.1",
+  "description": "Services and API integrations for DIUCSE Alumni platform",
+  "main": "bundles/diucsealumni-services.umd.js",
+  "module": "fesm2022/diucsealumni-services.mjs",
+  "typings": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/diucse-alumni-adk.git",
+    "directory": "projects/diucsealumni/services"
+  },
+  "keywords": [
+    "angular",
+    "diucse",
+    "alumni",
+    "services",
+    "api"
+  ],
+  "author": "DIUCSE Alumni Team",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@angular/common": "^20.0.0",
+    "@angular/core": "^20.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

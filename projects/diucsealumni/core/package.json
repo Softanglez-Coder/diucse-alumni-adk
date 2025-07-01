@@ -1,0 +1,32 @@
+{
+  "name": "@diucsealumni/core",
+  "version": "0.0.1",
+  "description": "Core utilities and functionalities for DIUCSE Alumni platform",
+  "main": "bundles/diucsealumni-core.umd.js",
+  "module": "fesm2022/diucsealumni-core.mjs",
+  "typings": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/diucse-alumni-adk.git",
+    "directory": "projects/diucsealumni/core"
+  },
+  "keywords": [
+    "angular",
+    "diucse",
+    "alumni",
+    "core"
+  ],
+  "author": "DIUCSE Alumni Team",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@angular/common": "^20.0.0",
+    "@angular/core": "^20.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

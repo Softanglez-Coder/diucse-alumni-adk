@@ -1,10 +1,66 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "paths": {
-      "@diucsealumni/core": ["dist/core/index"],
-      "@diucsealumni/services": ["dist/services/index"],
-      "@diucsealumni/utils": ["dist/utils/index"]
+      "@diucsealumni/core": [
+        "./dist/diucsealumni/core"
+      ],
+      "@diucsealumni/models": [
+        "./dist/diucsealumni/models"
+      ],
+      "@diucsealumni/services": [
+        "./dist/diucsealumni/services"
+      ],
+      "@diucsealumni/utils": [
+        "./dist/diucsealumni/utils"
+      ]
+    },
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "preserve"
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "typeCheckHostBindings": true,
+    "strictTemplates": true
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./projects/diucsealumni/services/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/diucsealumni/services/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/diucsealumni/models/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/diucsealumni/models/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/diucsealumni/utils/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/diucsealumni/utils/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/diucsealumni/core/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/diucsealumni/core/tsconfig.spec.json"
     }
-  }
+  ]
 }

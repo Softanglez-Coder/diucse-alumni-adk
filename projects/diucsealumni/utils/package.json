@@ -1,0 +1,33 @@
+{
+  "name": "@diucsealumni/utils",
+  "version": "0.0.1",
+  "description": "Utility functions and helpers for DIUCSE Alumni platform",
+  "main": "bundles/diucsealumni-utils.umd.js",
+  "module": "fesm2022/diucsealumni-utils.mjs",
+  "typings": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/diucse-alumni-adk.git",
+    "directory": "projects/diucsealumni/utils"
+  },
+  "keywords": [
+    "angular",
+    "diucse",
+    "alumni",
+    "utils",
+    "helpers"
+  ],
+  "author": "DIUCSE Alumni Team",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@angular/common": "^20.0.0",
+    "@angular/core": "^20.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

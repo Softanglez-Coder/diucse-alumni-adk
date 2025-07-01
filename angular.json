@@ -1,0 +1,114 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "@diucsealumni/services": {
+      "projectType": "library",
+      "root": "projects/diucsealumni/services",
+      "sourceRoot": "projects/diucsealumni/services/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/diucsealumni/services/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/diucsealumni/services/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/diucsealumni/services/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "@diucsealumni/models": {
+      "projectType": "library",
+      "root": "projects/diucsealumni/models",
+      "sourceRoot": "projects/diucsealumni/models/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/diucsealumni/models/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/diucsealumni/models/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/diucsealumni/models/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "@diucsealumni/utils": {
+      "projectType": "library",
+      "root": "projects/diucsealumni/utils",
+      "sourceRoot": "projects/diucsealumni/utils/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/diucsealumni/utils/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/diucsealumni/utils/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/diucsealumni/utils/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "@diucsealumni/core": {
+      "projectType": "library",
+      "root": "projects/diucsealumni/core",
+      "sourceRoot": "projects/diucsealumni/core/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/diucsealumni/core/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/diucsealumni/core/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/diucsealumni/core/tsconfig.spec.json"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+}
