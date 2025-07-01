@@ -1,3 +1,14 @@
+## [1.6.1](https://github.com/Softanglez-Coder/diucse-alumni-adk/compare/v1.6.0...v1.6.1) (2025-07-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core:** remove outdated sections from README.md for clarity and conciseness
+
+### Bug Fixes
+
+* **core:** remove outdated sections from README.md for clarity and conciseness ([3dd13d8](https://github.com/Softanglez-Coder/diucse-alumni-adk/commit/3dd13d87975a18c35cb35fdda1605630653ddb0c))
+
 ## [1.6.0](https://github.com/Softanglez-Coder/diucse-alumni-adk/compare/v1.5.0...v1.6.0) (2025-07-01)
 
 ## [1.5.0](https://github.com/Softanglez-Coder/diucse-alumni-adk/compare/v1.4.0...v1.5.0) (2025-07-01)
