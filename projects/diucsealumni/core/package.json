@@ -1,6 +1,6 @@
 {
   "name": "@diucsealumni/core",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "description": "Core utilities and functionalities for DIUCSE Alumni platform",
   "main": "bundles/diucsealumni-core.umd.js",
   "module": "fesm2022/diucsealumni-core.mjs",
