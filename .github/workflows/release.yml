@@ -35,18 +35,36 @@ jobs:
       - name: Build all packages
         run: npm run build:all
 
+      - name: Debug - Show commit information
+        run: |
+          echo "=== Debug Information ==="
+          echo "Event before: ${{ github.event.before }}"
+          echo "Current SHA: ${{ github.sha }}"
+          echo "=== Recent commits ==="
+          git log --oneline -5
+          echo "=== Changed files ==="
+          if [[ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]]; then
+            git diff --name-only ${{ github.event.before }}..${{ github.sha }}
+          else
+            echo "Initial commit - no previous commit to compare"
+          fi
+          echo "========================="
+
       - name: Check for Core changes and release
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          if git diff --name-only ${{ github.event.before }}..${{ github.sha }} | grep -q "projects/diucsealumni/core" || [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
-            echo "Core package has changes, running semantic-release..."
+          # Check if commit messages contain core scope or if files in core directory changed
+          if git log --oneline ${{ github.event.before }}..${{ github.sha }} | grep -q "(core)" || \
+             git diff --name-only ${{ github.event.before }}..${{ github.sha }} | grep -q "projects/diucsealumni/core" || \
+             [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
+            echo "Core package has changes or commits with (core) scope, running semantic-release..."
             cd projects/diucsealumni/core
             npx semantic-release
           else
-            echo "No changes in core package, skipping release."
+            echo "No changes or commits for core package, skipping release."
           fi
 
       - name: Check for Models changes and release
@@ -55,12 +73,15 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          if git diff --name-only ${{ github.event.before }}..${{ github.sha }} | grep -q "projects/diucsealumni/models" || [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
-            echo "Models package has changes, running semantic-release..."
+          # Check if commit messages contain models scope or if files in models directory changed
+          if git log --oneline ${{ github.event.before }}..${{ github.sha }} | grep -q "(models)" || \
+             git diff --name-only ${{ github.event.before }}..${{ github.sha }} | grep -q "projects/diucsealumni/models" || \
+             [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
+            echo "Models package has changes or commits with (models) scope, running semantic-release..."
             cd projects/diucsealumni/models
             npx semantic-release
           else
-            echo "No changes in models package, skipping release."
+            echo "No changes or commits for models package, skipping release."
           fi
 
       - name: Check for Services changes and release
@@ -69,12 +90,15 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          if git diff --name-only ${{ github.event.before }}..${{ github.sha }} | grep -q "projects/diucsealumni/services" || [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
-            echo "Services package has changes, running semantic-release..."
+          # Check if commit messages contain services scope or if files in services directory changed
+          if git log --oneline ${{ github.event.before }}..${{ github.sha }} | grep -q "(services)" || \
+             git diff --name-only ${{ github.event.before }}..${{ github.sha }} | grep -q "projects/diucsealumni/services" || \
+             [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
+            echo "Services package has changes or commits with (services) scope, running semantic-release..."
             cd projects/diucsealumni/services
             npx semantic-release
           else
-            echo "No changes in services package, skipping release."
+            echo "No changes or commits for services package, skipping release."
           fi
 
       - name: Check for Utils changes and release
@@ -83,12 +107,15 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          if git diff --name-only ${{ github.event.before }}..${{ github.sha }} | grep -q "projects/diucsealumni/utils" || [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
-            echo "Utils package has changes, running semantic-release..."
+          # Check if commit messages contain utils scope or if files in utils directory changed
+          if git log --oneline ${{ github.event.before }}..${{ github.sha }} | grep -q "(utils)" || \
+             git diff --name-only ${{ github.event.before }}..${{ github.sha }} | grep -q "projects/diucsealumni/utils" || \
+             [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
+            echo "Utils package has changes or commits with (utils) scope, running semantic-release..."
             cd projects/diucsealumni/utils
             npx semantic-release
           else
-            echo "No changes in utils package, skipping release."
+            echo "No changes or commits for utils package, skipping release."
           fi
 
       - name: Send notification to Discord
