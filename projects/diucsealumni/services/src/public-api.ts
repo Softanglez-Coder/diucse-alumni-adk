@@ -1,5 +1,1 @@
-/*
- * Public API Surface of services
- */
-
-export * from './lib/services';
+export * from './auth.service';
