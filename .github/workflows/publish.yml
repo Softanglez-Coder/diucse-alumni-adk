@@ -11,6 +11,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PAT }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -18,14 +21,41 @@ jobs:
           node-version: 20
           registry-url: 'https://registry.npmjs.org/'
 
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Install dependencies
         run: npm ci
 
       - name: Build all libraries
         run: npm run build:all
 
-      - name: Run semantic-release
+      - name: Release Core package
         env:
           GH_TOKEN: ${{ secrets.PAT }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        working-directory: projects/diucsealumni/core
+        run: npx semantic-release
+
+      - name: Release Models package
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        working-directory: projects/diucsealumni/models
+        run: npx semantic-release
+
+      - name: Release Services package
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        working-directory: projects/diucsealumni/services
+        run: npx semantic-release
+
+      - name: Release Utils package
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        working-directory: projects/diucsealumni/utils
         run: npx semantic-release
