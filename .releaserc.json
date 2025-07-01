@@ -111,7 +111,11 @@
     [
       "@semantic-release/git",
       {
-        "assets": ["CHANGELOG.md", "package.json", "./projects/**/package.json"]
+        "assets": [
+          "CHANGELOG.md",
+          "package.json",
+          "./projects/**/package.json"
+        ]
       }
     ],
     "@semantic-release/github"
