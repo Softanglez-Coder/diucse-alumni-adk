@@ -1,6 +1,6 @@
 {
   "name": "@diucsealumni/services",
-  "version": "2.0.0",
+  "version": "1.6.2",
   "description": "Services and API integrations for DIUCSE Alumni platform",
   "main": "bundles/diucsealumni-services.umd.js",
   "module": "fesm2022/diucsealumni-services.mjs",
