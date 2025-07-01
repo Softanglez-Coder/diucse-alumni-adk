@@ -9,7 +9,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "semantic-release": "semantic-release",
-    "release:all": "./scripts/release-all.sh"
+    "release:all": "./scripts/release-all.sh",
+    "test:release": "./scripts/test-release.sh"
   },
   "private": true,
   "dependencies": {
@@ -26,7 +27,13 @@
     "@angular/build": "^20.0.4",
     "@angular/cli": "^20.0.2",
     "@angular/compiler-cli": "^20.0.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^9.2.6",
+    "@semantic-release/npm": "^11.0.2",
     "@types/jasmine": "~5.1.0",
+    "conventional-changelog-conventionalcommits": "^7.0.2",
     "jasmine-core": "~5.7.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -34,13 +41,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^20.0.0",
-    "typescript": "~5.8.2",
     "semantic-release": "^22.0.0",
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^9.2.6",
-    "@semantic-release/npm": "^11.0.2",
-    "@semantic-release/exec": "^6.0.3",
-    "semantic-release-monorepo": "^8.0.2"
+    "typescript": "~5.8.2"
   }
 }

@@ -42,41 +42,77 @@ ng build @diucsealumni/utils
 
 This project uses semantic-release for automated versioning and publishing. The release process is triggered automatically when commits are pushed to the `main` branch.
 
+### Fixed Issues
+
+The configuration has been updated to resolve common issues:
+- ✅ Removed problematic `semantic-release-monorepo` dependency
+- ✅ Fixed GitHub Actions permissions
+- ✅ Added scope-based release rules for individual packages
+- ✅ Added change detection to only release packages that have changes
+
 ### Commit Message Convention
 
-This project follows the [Conventional Commits](https://conventionalcommits.org/) specification. Use the following format for your commit messages:
+This project follows the [Conventional Commits](https://conventionalcommits.org/) specification. **Important:** You must include the package scope for changes to be released:
 
 ```
-<type>[optional scope]: <description>
+<type>(<scope>): <description>
 
 [optional body]
 
 [optional footer(s)]
 ```
 
+#### Required Scopes for Package Releases:
+- `feat(core): description` - Releases @diucsealumni/core
+- `fix(models): description` - Releases @diucsealumni/models  
+- `feat(services): description` - Releases @diucsealumni/services
+- `perf(utils): description` - Releases @diucsealumni/utils
+
 #### Types:
 - `feat`: A new feature (triggers a minor release)
 - `fix`: A bug fix (triggers a patch release)
-- `docs`: Documentation only changes
-- `style`: Changes that do not affect the meaning of the code
-- `refactor`: A code change that neither fixes a bug nor adds a feature
-- `perf`: A code change that improves performance
-- `test`: Adding missing tests or correcting existing tests
-- `chore`: Changes to the build process or auxiliary tools
+- `docs`: Documentation only changes (no release)
+- `style`: Changes that do not affect the meaning of the code (no release)
+- `refactor`: A code change that neither fixes a bug nor adds a feature (no release)
+- `perf`: A code change that improves performance (triggers a patch release)
+- `test`: Adding missing tests or correcting existing tests (no release)
+- `chore`: Changes to the build process or auxiliary tools (no release)
 
 #### Breaking Changes:
 To trigger a major release, include `BREAKING CHANGE:` in the footer or add `!` after the type:
 
 ```
-feat!: remove deprecated API
+feat(core)!: remove deprecated API
+```
+
+### Testing Release Configuration
+
+Test individual package configurations:
+
+```bash
+# Test core package
+./scripts/test-release.sh core
+
+# Test models package  
+./scripts/test-release.sh models
+
+# Test services package
+./scripts/test-release.sh services
+
+# Test utils package
+./scripts/test-release.sh utils
 ```
 
 ### Manual Release
 
-To manually trigger a release for all packages:
+To manually trigger releases (requires proper Git setup and NPM token):
 
 ```bash
-npm run semantic-release
+# Release only packages with changes
+npm run release:all
+
+# Force release all packages
+./scripts/release-all.sh --force
 ```
 
 ## Running unit tests

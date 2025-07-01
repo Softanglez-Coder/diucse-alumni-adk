@@ -1,12 +1,34 @@
 {
-  "extends": "semantic-release-monorepo",
   "branches": [
     "main",
     "master"
   ],
+  "repositoryUrl": "https://github.com/Softanglez-Coder/diucse-alumni-adk.git",
   "plugins": [
-    "@semantic-release/commit-analyzer",
-    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "releaseRules": [
+          {"type": "feat", "scope": "models", "release": "minor"},
+          {"type": "fix", "scope": "models", "release": "patch"},
+          {"type": "perf", "scope": "models", "release": "patch"},
+          {"breaking": true, "scope": "models", "release": "major"}
+        ]
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            {"type": "feat", "scope": "models", "section": "Features"},
+            {"type": "fix", "scope": "models", "section": "Bug Fixes"},
+            {"type": "perf", "scope": "models", "section": "Performance Improvements"}
+          ]
+        }
+      }
+    ],
     [
       "@semantic-release/changelog",
       {
@@ -16,13 +38,13 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "ng build @diucsealumni/models"
+        "prepareCmd": "cd ../../../ && ng build @diucsealumni/models"
       }
     ],
     [
       "@semantic-release/npm",
       {
-        "pkgRoot": "dist/diucsealumni/models"
+        "pkgRoot": "../../../dist/diucsealumni/models"
       }
     ],
     [

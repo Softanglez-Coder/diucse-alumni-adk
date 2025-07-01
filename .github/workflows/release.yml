@@ -5,14 +5,16 @@ on:
     branches:
       - main
       - master
-  pull_request:
-    types:
-      - closed
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  packages: write
 
 jobs:
   release:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     
     steps:
       - name: Checkout
@@ -33,37 +35,61 @@ jobs:
       - name: Build all packages
         run: npm run build:all
 
-      - name: Release Core Package
+      - name: Check for Core changes and release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
-        working-directory: ./projects/diucsealumni/core
+        run: |
+          if git diff --name-only ${{ github.event.before }}..${{ github.sha }} | grep -q "projects/diucsealumni/core" || [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
+            echo "Core package has changes, running semantic-release..."
+            cd projects/diucsealumni/core
+            npx semantic-release
+          else
+            echo "No changes in core package, skipping release."
+          fi
 
-      - name: Release Models Package
+      - name: Check for Models changes and release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
-        working-directory: ./projects/diucsealumni/models
+        run: |
+          if git diff --name-only ${{ github.event.before }}..${{ github.sha }} | grep -q "projects/diucsealumni/models" || [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
+            echo "Models package has changes, running semantic-release..."
+            cd projects/diucsealumni/models
+            npx semantic-release
+          else
+            echo "No changes in models package, skipping release."
+          fi
 
-      - name: Release Services Package
+      - name: Check for Services changes and release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
-        working-directory: ./projects/diucsealumni/services
+        run: |
+          if git diff --name-only ${{ github.event.before }}..${{ github.sha }} | grep -q "projects/diucsealumni/services" || [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
+            echo "Services package has changes, running semantic-release..."
+            cd projects/diucsealumni/services
+            npx semantic-release
+          else
+            echo "No changes in services package, skipping release."
+          fi
 
-      - name: Release Utils Package
+      - name: Check for Utils changes and release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
-        working-directory: ./projects/diucsealumni/utils
+        run: |
+          if git diff --name-only ${{ github.event.before }}..${{ github.sha }} | grep -q "projects/diucsealumni/utils" || [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]]; then
+            echo "Utils package has changes, running semantic-release..."
+            cd projects/diucsealumni/utils
+            npx semantic-release
+          else
+            echo "No changes in utils package, skipping release."
+          fi
 
       - name: Send notification to Discord
         if: ${{ success() && github.ref == 'refs/heads/main' }}
